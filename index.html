@@ -4,205 +4,370 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Personal Website</title>
+    <title>My Personal Website - Windows 95 Style</title>
     <style>
-        /* Basic styling */
+        /* Windows 95 Classic Theme */
         body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
+            font-family: 'MS Sans Serif', 'Arial', sans-serif;
+            background-color: #008080;
             margin: 0;
             padding: 0;
-            color: #333;
-            background-color: #f9f9f9;
+            color: black;
+            background-image: url('https://i.imgur.com/7QbIUKx.png');
+            background-repeat: repeat;
         }
 
-        header {
-            background-color: #2c3e50;
+        .window {
+            background-color: #c0c0c0;
+            border: 2px solid;
+            border-color: #dfdfdf #808080 #808080 #dfdfdf;
+            padding: 3px;
+            margin: 20px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .title-bar {
+            background: linear-gradient(90deg, #000080, #1084d0);
             color: white;
-            text-align: center;
-            padding: 2rem 0;
-        }
-
-        nav {
-            background-color: #34495e;
-            padding: 1rem;
-        }
-
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        nav li {
-            margin: 0 1rem;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
+            padding: 3px 5px;
             font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        nav a:hover {
-            color: #f1c40f;
+        .title-bar-text {
+            padding-left: 20px;
+            background-image: url('https://i.imgur.com/9R8ZTzl.png');
+            background-repeat: no-repeat;
+            background-position: left center;
         }
 
-        section {
-            padding: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
+        .title-bar-controls {
+            display: flex;
         }
 
+        .title-bar-button {
+            width: 16px;
+            height: 14px;
+            margin-left: 2px;
+            background-color: #c0c0c0;
+            border: 1px solid;
+            border-color: #dfdfdf #808080 #808080 #dfdfdf;
+            font-size: 8px;
+            line-height: 14px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .window-body {
+            padding: 10px;
+            border: 1px solid #808080;
+            margin-top: 3px;
+        }
+
+        .tab-control {
+            display: flex;
+            margin-bottom: -1px;
+        }
+
+        .tab {
+            padding: 3px 10px;
+            background-color: #c0c0c0;
+            border: 1px solid;
+            border-color: #808080 #dfdfdf #dfdfdf #808080;
+            margin-right: 3px;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            background-color: white;
+            border-bottom: 1px solid white;
+        }
+
+        .button {
+            background-color: #c0c0c0;
+            border: 2px solid;
+            border-color: #dfdfdf #808080 #808080 #dfdfdf;
+            padding: 3px 10px;
+            cursor: pointer;
+            font-family: 'MS Sans Serif', 'Arial', sans-serif;
+            font-size: 12px;
+        }
+
+        .button:active {
+            border-color: #808080 #dfdfdf #dfdfdf #808080;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #808080;
+            margin: 10px 0;
+        }
+
+        .icon {
+            display: inline-block;
+            width: 32px;
+            text-align: center;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .icon img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .icon-label {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .start-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #c0c0c0;
+            border-top: 2px solid #dfdfdf;
+            display: flex;
+            justify-content: space-between;
+            padding: 2px;
+            z-index: 1000;
+        }
+
+        .start-button {
+            background: linear-gradient(90deg, #000080, #1084d0);
+            color: white;
+            padding: 2px 6px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .start-button img {
+            margin-right: 5px;
+        }
+
+        .clock {
+            padding: 2px 6px;
+            border: 1px solid;
+            border-color: #808080 #dfdfdf #dfdfdf #808080;
+        }
+
+        .desktop-icon {
+            position: absolute;
+            width: 80px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .desktop-icon img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .desktop-icon-label {
+            font-size: 12px;
+            margin-top: 5px;
+            color: white;
+            text-shadow: 1px 1px 1px black;
+        }
+
+        /* Content styles */
         h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #f1c40f;
-            padding-bottom: 0.5rem;
+            color: #000080;
+            border-bottom: 1px solid #808080;
+            padding-bottom: 5px;
+        }
+
+        ul {
+            padding-left: 20px;
         }
 
         .project,
         .hobby,
         .family-member {
             background-color: white;
-            border-radius: 5px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        footer {
-            background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 1rem 0;
-            margin-top: 2rem;
-        }
-
-        @media (max-width: 600px) {
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            nav li {
-                margin: 0.5rem 0;
-            }
+            border: 1px solid #808080;
+            padding: 10px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <h1>Welcome to My Personal Website</h1>
-        <p>Learn more about my academic journey, projects, and personal life</p>
-    </header>
+    <!-- Desktop Icons -->
+    <div class="desktop-icon" style="left: 20px; top: 20px;">
+        <img src="https://i.imgur.com/9R8ZTzl.png" alt="My Computer">
+        <div class="desktop-icon-label">My Website</div>
+    </div>
 
-    <nav>
-        <ul>
-            <li><a href="#about">About Me</a></li>
-            <li><a href="#major">My Major</a></li>
-            <li><a href="#classes">Classes</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#hobbies">Hobbies</a></li>
-            <li><a href="#family">Family</a></li>
-        </ul>
-    </nav>
+    <div class="desktop-icon" style="left: 20px; top: 80px;">
+        <img src="https://i.imgur.com/9R8ZTzl.png" alt="Projects">
+        <div class="desktop-icon-label">Projects</div>
+    </div>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Hello! I'm Payton Schutte, a senior at the University of Illinois at Urbana-Champaign. This website showcases
-            my academic
-            journey, personal projects, and interests outside of school.</p>
-        <p>Feel free to explore and learn more about me!</p>
-    </section>
-
-    <section id="major">
-        <h2>My Major</h2>
-        <p>I am currently pursuing a degree in <strong>Computer Engineering</strong> at the Grainger College of
-            Engineering.</p>
-        <p>I chose this field because [brief explanation of why you chose your major]. My academic focus includes
-            [mention any concentrations or specializations].</p>
-        <p>After graduation, I hope to [your career goals or aspirations].</p>
-    </section>
-
-    <section id="classes">
-        <h2>Classes</h2>
-        <h3>Current Semester (Spring 2024)</h3>
-        <ul>
-            <li>[Class Name 1] - [Brief description or what you're learning]</li>
-            <li>[Class Name 2] - [Brief description or what you're learning]</li>
-            <li>[Class Name 3] - [Brief description or what you're learning]</li>
-        </ul>
-
-        <h3>Previous Notable Classes</h3>
-        <ul>
-            <li>[Class Name] - [What you learned or why it was important]</li>
-            <li>[Class Name] - [What you learned or why it was important]</li>
-        </ul>
-    </section>
-
-    <section id="projects">
-        <h2>Projects</h2>
-
-        <div class="project">
-            <h3>[Project Name 1]</h3>
-            <p><strong>Date:</strong> [Month Year]</p>
-            <p><strong>Description:</strong> [Detailed description of the project, technologies used, and your role]</p>
-            <p><strong>Skills Gained:</strong> [List skills or knowledge gained from this project]</p>
+    <!-- Main Window -->
+    <div class="window" style="width: 80%; max-width: 800px; margin: 40px auto;">
+        <div class="title-bar">
+            <div class="title-bar-text">My Personal Website</div>
+            <div class="title-bar-controls">
+                <button class="title-bar-button">-</button>
+                <button class="title-bar-button">□</button>
+                <button class="title-bar-button">X</button>
+            </div>
         </div>
+        <div class="window-body">
+            <div class="tab-control">
+                <div class="tab active">About Me</div>
+                <div class="tab">Education</div>
+                <div class="tab">Projects</div>
+                <div class="tab">Hobbies</div>
+                <div class="tab">Family</div>
+            </div>
 
-        <div class="project">
-            <h3>[Project Name 2]</h3>
-            <p><strong>Date:</strong> [Month Year]</p>
-            <p><strong>Description:</strong> [Detailed description of the project, technologies used, and your role]</p>
-            <p><strong>Skills Gained:</strong> [List skills or knowledge gained from this project]</p>
+            <div id="about" class="tab-content">
+                <h2>About Me</h2>
+                <p>Welcome to my Windows 95-style personal website! I'm [Your Name], a [Your Year] student at [Your
+                    University].</p>
+
+                <div style="display: flex; align-items: center; margin: 20px 0;">
+                    <img src="https://via.placeholder.com/100" alt="My Photo"
+                        style="border: 2px solid #808080; margin-right: 20px;">
+                    <div>
+                        <p><strong>Name:</strong> [Your Full Name]</p>
+                        <p><strong>Major:</strong> [Your Major]</p>
+                        <p><strong>Interests:</strong> [Brief list of interests]</p>
+                    </div>
+                </div>
+
+                <button class="button">View My Resume</button>
+            </div>
+
+            <div id="education" class="tab-content" style="display: none;">
+                <h2>My Major</h2>
+                <p>I'm currently studying <strong>[Your Major]</strong> at [Your University].</p>
+                <p>This program focuses on [describe your major] and prepares students for careers in [related fields].
+                </p>
+
+                <h3>Current Classes</h3>
+                <ul>
+                    <li>[Class Name 1] - [Brief description]</li>
+                    <li>[Class Name 2] - [Brief description]</li>
+                    <li>[Class Name 3] - [Brief description]</li>
+                </ul>
+
+                <h3>Completed Notable Classes</h3>
+                <ul>
+                    <li>[Class Name] - [What you learned]</li>
+                    <li>[Class Name] - [What you learned]</li>
+                </ul>
+            </div>
+
+            <div id="projects" class="tab-content" style="display: none;">
+                <h2>My Projects</h2>
+
+                <div class="project">
+                    <h3>[Project Name 1]</h3>
+                    <p><strong>Date:</strong> [Month Year]</p>
+                    <p><strong>Technologies:</strong> [List technologies used]</p>
+                    <p>[Detailed description of the project and your role]</p>
+                    <button class="button">View Project</button>
+                </div>
+
+                <div class="project">
+                    <h3>[Project Name 2]</h3>
+                    <p><strong>Date:</strong> [Month Year]</p>
+                    <p><strong>Technologies:</strong> [List technologies used]</p>
+                    <p>[Detailed description of the project and your role]</p>
+                    <button class="button">View Project</button>
+                </div>
+            </div>
+
+            <div id="hobbies" class="tab-content" style="display: none;">
+                <h2>My Hobbies</h2>
+
+                <div class="hobby">
+                    <h3>[Hobby 1]</h3>
+                    <p>[Description of the hobby and why you enjoy it]</p>
+                    <p>[Any special achievements or experiences]</p>
+                </div>
+
+                <div class="hobby">
+                    <h3>[Hobby 2]</h3>
+                    <p>[Description of the hobby and why you enjoy it]</p>
+                    <p>[Any special achievements or experiences]</p>
+                </div>
+            </div>
+
+            <div id="family" class="tab-content" style="display: none;">
+                <h2>My Family</h2>
+                <p>[Brief introduction about your family]</p>
+
+                <div class="family-member">
+                    <h3>[Family Member 1]</h3>
+                    <p><strong>Relationship:</strong> [Mother/Father/Sibling/etc.]</p>
+                    <p>[Description and what they mean to you]</p>
+                </div>
+
+                <div class="family-member">
+                    <h3>[Family Member 2]</h3>
+                    <p><strong>Relationship:</strong> [Mother/Father/Sibling/etc.]</p>
+                    <p>[Description and what they mean to you]</p>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <!-- Add more projects as needed -->
-    </section>
-
-    <section id="hobbies">
-        <h2>Hobbies & Interests</h2>
-
-        <div class="hobby">
-            <h3>[Hobby 1]</h3>
-            <p>[Description of the hobby, how long you've been doing it, why you enjoy it]</p>
-            <p>[Any notable achievements or special memories related to this hobby]</p>
+    <!-- Start Bar -->
+    <div class="start-bar">
+        <div class="start-button">
+            <img src="https://i.imgur.com/9R8ZTzl.png" width="16" height="16" alt="Start">
+            Start
         </div>
-
-        <div class="hobby">
-            <h3>[Hobby 2]</h3>
-            <p>[Description of the hobby, how long you've been doing it, why you enjoy it]</p>
-            <p>[Any notable achievements or special memories related to this hobby]</p>
+        <div class="clock">
+            [Current Time]
         </div>
+    </div>
 
-        <!-- Add more hobbies as needed -->
-    </section>
+    <script>
+        // Simple tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                // Hide all tab contents
+                document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
 
-    <section id="family">
-        <h2>My Family</h2>
-        <p>[Brief introduction about your family - size, general information]</p>
+                // Add active class to clicked tab
+                tab.classList.add('active');
 
-        <div class="family-member">
-            <h3>[Family Member 1]</h3>
-            <p>[Relationship: e.g., Mother, Father, Sister]</p>
-            <p>[Brief description - occupation, personality, your relationship with them]</p>
-        </div>
+                // Show corresponding content
+                const tabId = tab.textContent.toLowerCase().replace(' ', '-');
+                document.getElementById(tabId).style.display = 'block';
+            });
+        });
 
-        <div class="family-member">
-            <h3>[Family Member 2]</h3>
-            <p>[Relationship: e.g., Mother, Father, Sister]</p>
-            <p>[Brief description - occupation, personality, your relationship with them]</p>
-        </div>
+        // Update clock
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            document.querySelector('.clock').textContent = timeString;
+        }
 
-        <!-- Add more family members as needed -->
-    </section>
+        setInterval(updateClock, 1000);
+        updateClock();
 
-    <footer>
-        <p>Contact me at: <a href="paytonschutte34@gmail.com" style="color: #f1c40f;">paytonschutte34@gmail.com</a></p>
-    </footer>
+        // Window controls (minimize/maximize/close would need more complex implementation)
+        document.querySelectorAll('.title-bar-button').forEach((button, index) => {
+            button.addEventListener('click', () => {
+                if (index === 2) { // Close button
+                    alert('Window would close here in a real implementation');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
