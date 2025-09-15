@@ -5,27 +5,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payton Schutte</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Portfolio website for Payton Schutte, Computer Engineering student at UIUC. Explore projects, classes, hobbies, and more.">
+    <meta name="keywords" content="Payton Schutte, Portfolio, Computer Engineering, UIUC, Projects, Resume, Hobbies">
+    <meta name="author" content="Payton Schutte">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Payton Schutte Portfolio">
+    <meta property="og:description" content="Explore my academic journey, projects, and interests.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://schuttep.github.io/">
+    <meta property="og:image"
+        content="https://ui-avatars.com/api/?name=Payton+Schutte&background=2c3e50&color=f1c40f&size=256">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Payton Schutte Portfolio">
+    <meta name="twitter:description" content="Explore my academic journey, projects, and interests.">
+    <meta name="twitter:image"
+        content="https://ui-avatars.com/api/?name=Payton+Schutte&background=2c3e50&color=f1c40f&size=256">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
         /* Basic styling */
+
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Montserrat', Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            color: #333;
-            background-color: #f9f9f9;
+            color: #222;
+            background: linear-gradient(135deg, #f9f9f9 0%, #e3e9f0 100%);
         }
 
         header {
-            background-color: #2c3e50;
+            background: linear-gradient(120deg, #2c3e50 60%, #2980b9 100%);
             color: white;
             text-align: center;
-            padding: 2rem 0;
+            padding: 3rem 0 2rem 0;
+            position: relative;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #f1c40f;
+            box-shadow: 0 4px 16px rgba(44, 62, 80, 0.15);
+            margin-bottom: 1rem;
+            background: #fff;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
         }
 
         nav {
             background-color: #34495e;
             padding: 1rem;
+            box-shadow: 0 2px 8px rgba(44, 62, 80, 0.05);
         }
 
         nav ul {
@@ -44,16 +95,20 @@
             color: white;
             text-decoration: none;
             font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background 0.2s, color 0.2s;
         }
 
         nav a:hover {
-            color: #f1c40f;
+            color: #2c3e50;
+            background: #f1c40f;
         }
 
         section {
             padding: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
+            max-width: 900px;
+            margin: 2rem auto 0 auto;
         }
 
         h2 {
@@ -65,19 +120,29 @@
         .project,
         .hobby,
         .family-member {
-            background-color: white;
-            border-radius: 5px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 1.5rem 1.2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 16px rgba(44, 62, 80, 0.08);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .project:hover,
+        .hobby:hover,
+        .family-member:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.13);
         }
 
         footer {
             background-color: #2c3e50;
             color: white;
             text-align: center;
-            padding: 1rem 0;
-            margin-top: 2rem;
+            padding: 1.5rem 0 1rem 0;
+            margin-top: 3rem;
+            font-size: 1.1rem;
+            letter-spacing: 0.02em;
         }
 
         @media (max-width: 600px) {
@@ -95,110 +160,81 @@
 
 <body>
     <header>
+        <img src="https://ui-avatars.com/api/?name=Payton+Schutte&background=2c3e50&color=f1c40f&size=256"
+            alt="Profile photo of Payton Schutte" class="profile-img" />
         <h1>Welcome to My Portfolio</h1>
         <p>Learn more about my academic journey, projects, and personal life</p>
+        <a href="SchutteResume25.pdf" class="resume-btn" target="_blank" rel="noopener" download>Download Resume
+            (PDF)</a>
     </header>
 
-    <nav>
+    <nav aria-label="Main navigation">
         <ul>
             <li><a href="#about">About Me</a></li>
             <li><a href="#major">My Major</a></li>
-            <li><a href="#classes">Classes</a></li>
+            <li><a href="#classes">Relevant Classes</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#hobbies">Hobbies</a></li>
             <li><a href="#family">Family</a></li>
         </ul>
     </nav>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Hello! I'm Payton Schutte, a computer engineering student at the University of Illinois at Urbana-Champaign.
-            This
-            website showcases my academic
-            journey, personal projects, and interests outside of school.</p>
-        <p>Feel free to explore and learn more about me!</p>
-    </section>
+    <main>
+        <section id="about">
+            <h2>About Me</h2>
+            <p>Hello! I'm Payton Schutte, a computer engineering student at the University of Illinois at
+                Urbana-Champaign.
+                This website showcases my academic journey, personal projects, and interests outside of school.</p>
+            <p>Feel free to explore and learn more about me!</p>
+        </section>
 
-    <section id="major">
-        <h2>My Major</h2>
-        <p>I am currently pursuing a degree in <strong>Computer Engineering</strong> at the <strong>University of
-                Illinois
-                at Urbana-Champaign</strong>.</p>
-        <p>After graduation, I hope to [your career goals or aspirations].</p>
-    </section>
+        <section id="major">
+            <h2>My Major</h2>
+            <p>I am currently pursuing a degree in <strong>Computer Engineering</strong> at the <strong>University of
+                    Illinois at Urbana-Champaign</strong>.</p>
+            <p>After graduation, I hope to develop my expertise in the ML/AI field.</p>
+        </section>
 
-    <section id="classes">
-        <h2>Classes</h2>
-        <h3>Current Semester (Spring 2024)</h3>
-        <ul>
-            <li>[Class Name 1] - [Brief description or what you're learning]</li>
-            <li>[Class Name 2] - [Brief description or what you're learning]</li>
-            <li>[Class Name 3] - [Brief description or what you're learning]</li>
-        </ul>
 
-        <h3>Previous Notable Classes</h3>
-        <ul>
-            <li>[Class Name] - [What you learned or why it was important]</li>
-            <li>[Class Name] - [What you learned or why it was important]</li>
-        </ul>
-    </section>
+        <section id="projects">
+            <h2>Projects</h2>
 
-    <section id="projects">
-        <h2>Projects</h2>
+            <div class="project">
+                <h3>[Project Name 1]</h3>
+                <p><strong>Date:</strong> [Month Year]</p>
+                <p><strong>Description:</strong> [Detailed description of the project, technologies used, and your role]
+                </p>
+                <p><strong>Skills Gained:</strong> [List skills or knowledge gained from this project]</p>
+            </div>
 
-        <div class="project">
-            <h3>[Project Name 1]</h3>
-            <p><strong>Date:</strong> [Month Year]</p>
-            <p><strong>Description:</strong> [Detailed description of the project, technologies used, and your role]</p>
-            <p><strong>Skills Gained:</strong> [List skills or knowledge gained from this project]</p>
-        </div>
+            <div class="project">
+                <h3>[Project Name 2]</h3>
+                <p><strong>Date:</strong> [Month Year]</p>
+                <p><strong>Description:</strong> [Detailed description of the project, technologies used, and your role]
+                </p>
+                <p><strong>Skills Gained:</strong> [List skills or knowledge gained from this project]</p>
+            </div>
 
-        <div class="project">
-            <h3>[Project Name 2]</h3>
-            <p><strong>Date:</strong> [Month Year]</p>
-            <p><strong>Description:</strong> [Detailed description of the project, technologies used, and your role]</p>
-            <p><strong>Skills Gained:</strong> [List skills or knowledge gained from this project]</p>
-        </div>
+            <!-- Add more projects as needed -->
+        </section>
 
-        <!-- Add more projects as needed -->
-    </section>
-
-    <section id="hobbies">
-        <h2>Hobbies & Interests</h2>
-
-        <div class="hobby">
-            <h3>[Hobby 1]</h3>
-            <p>[Description of the hobby, how long you've been doing it, why you enjoy it]</p>
-            <p>[Any notable achievements or special memories related to this hobby]</p>
-        </div>
-
-        <div class="hobby">
-            <h3>[Hobby 2]</h3>
-            <p>[Description of the hobby, how long you've been doing it, why you enjoy it]</p>
-            <p>[Any notable achievements or special memories related to this hobby]</p>
-        </div>
-
+        <section id="classes">
+            <h2>Relevant Classes</h2>
+            <ul>
+                <li>ECE 2xx – Digital Systems: Combinational/sequential logic, Verilog, FPGA labs</li>
+                <li>ECE 2xx – Computer Systems & Programming: C/C++, memory, concurrency basics</li>
+                <li>CS 2xx – Data Structures & Algorithms: Big-O, trees, graphs, hashing</li>
+                <li>MATH 2xx – Linear Algebra: Matrices, eigenvalues, applications to systems</li>
+                <li>MATH 2xx – Calculus III: Multivariable calculus and vector analysis</li>
+                <li>STAT 2xx – Probability & Statistics: Random variables, estimators, inference</li>
+                <li>ECE 3xx – Computer Architecture: ISA, pipelines, caches, performance</li>
+                <li>ECE 3xx – Signals & Systems: Fourier/Laplace, filters, sampling</li>
+            </ul>
+            <p class="visually-hidden">Note: Replace placeholders with exact course numbers/titles from your resume.</p>
+        </section>
         <!-- Add more hobbies as needed -->
-    </section>
-
-    <section id="family">
-        <h2>My Family</h2>
-        <p>[Brief introduction about your family - size, general information]</p>
-
-        <div class="family-member">
-            <h3>[Family Member 1]</h3>
-            <p>[Relationship: e.g., Mother, Father, Sister]</p>
-            <p>[Brief description - occupation, personality, your relationship with them]</p>
-        </div>
-
-        <div class="family-member">
-            <h3>[Family Member 2]</h3>
-            <p>[Relationship: e.g., Mother, Father, Sister]</p>
-            <p>[Brief description - occupation, personality, your relationship with them]</p>
-        </div>
-
-        <!-- Add more family members as needed -->
-    </section>
+        </section>
+    </main>
 
     <footer>
         <p>© 2024 Payton Schutte. All rights reserved.</p>
@@ -208,3 +244,22 @@
 </body>
 
 </html>
+.resume-btn {
+display: inline-block;
+margin-top: 1.2rem;
+padding: 0.7rem 1.5rem;
+background: #f1c40f;
+color: #2c3e50;
+font-weight: bold;
+border: none;
+border-radius: 24px;
+font-size: 1.1rem;
+text-decoration: none;
+box-shadow: 0 2px 8px rgba(44,62,80,0.08);
+transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+.resume-btn:hover {
+background: #2c3e50;
+color: #f1c40f;
+transform: translateY(-2px) scale(1.04);
+}
