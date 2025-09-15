@@ -66,13 +66,14 @@
             box-sizing: border-box;
         }
 
-        .hero::before {
-            content: "";
+        /* Block I top-left */
+        .hero-block-i {
             position: absolute;
-            inset: 1rem;
-            border: 4px solid var(--illini-orange);
-            border-radius: 16px;
-            pointer-events: none;
+            top: 1rem;
+            left: 1rem;
+            width: 64px;
+            height: auto;
+            z-index: 2;
         }
 
         .hero-inner {
@@ -114,6 +115,24 @@
             border: 4px solid var(--illini-orange);
             box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
             background: #fff;
+        }
+
+        /* About layout */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .about-photo {
+            width: 100%;
+            max-width: 320px;
+            border-radius: 12px;
+            border: 4px solid var(--illini-orange);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+            background: #fff;
+            justify-self: center;
         }
 
         .profile-img {
@@ -267,9 +286,17 @@
             .hero-logo {
                 width: 96px;
             }
+        }
 
-            .hero::before {
-                inset: 0.75rem;
+        /* Stack About section on smaller screens */
+        @media (max-width: 900px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about-photo {
+                max-width: 420px;
             }
         }
     </style>
@@ -277,15 +304,13 @@
 
 <body>
     <section class="hero" aria-label="Introduction">
+        <img src="theI.png" alt="Illinois Block I" class="hero-block-i" />
         <img src="PortfolioLogo2.png" alt="Payton Schutte logo" class="hero-logo" />
         <div class="hero-inner">
             <div class="hero-text">
                 <h1>Hello, I am Payton Schutte.</h1>
                 <p>I'm a Computer Engineering student at the University of Illinois Urbana-Champaign.</p>
                 <p>I love building projects and exploring ML/AI across hardware and software.</p>
-            </div>
-            <div class="hero-media">
-                <img src="PortfolioLogo.png" alt="Photo of Payton Schutte" class="hero-photo" />
             </div>
         </div>
     </section>
@@ -304,10 +329,19 @@
     <main>
         <section id="about">
             <h2>About Me</h2>
-            <p>Hello! I'm Payton Schutte, a computer engineering student at the University of Illinois at
-                Urbana-Champaign.
-                This website showcases my academic journey, personal projects, and interests outside of school.</p>
-            <p>Feel free to explore and learn more about me!</p>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Hello! I'm Payton Schutte, a computer engineering student at the University of Illinois at
+                        Urbana-Champaign.
+                        This website showcases my academic journey, personal projects, and interests outside of school.
+                    </p>
+                    <p>Feel free to explore and learn more about me!</p>
+                </div>
+                <div class="about-media">
+                    <!-- Replace me.jpg with your actual JPG filename -->
+                    <img src="me.jpg" alt="Photo of Payton Schutte" class="about-photo" />
+                </div>
+            </div>
         </section>
 
         <section id="major">
