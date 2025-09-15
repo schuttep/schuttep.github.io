@@ -16,18 +16,28 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://schuttep.github.io/">
     <meta property="og:image"
-        content="https://ui-avatars.com/api/?name=Payton+Schutte&background=2c3e50&color=f1c40f&size=256">
+        content="https://ui-avatars.com/api/?name=Payton+Schutte&background=13294B&color=E84A27&size=256">
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Payton Schutte Portfolio">
     <meta name="twitter:description" content="Explore my academic journey, projects, and interests.">
     <meta name="twitter:image"
-        content="https://ui-avatars.com/api/?name=Payton+Schutte&background=2c3e50&color=f1c40f&size=256">
+        content="https://ui-avatars.com/api/?name=Payton+Schutte&background=13294B&color=E84A27&size=256">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png">
     <style>
+        :root {
+            --illini-blue: #13294B;
+            /* Illinois Blue */
+            --illini-blue-900: #0F2140;
+            /* Darker variant for surfaces */
+            --illini-orange: #E84A27;
+            /* Illinois Orange */
+            --white: #FFFFFF;
+        }
+
         html {
             scroll-behavior: smooth;
         }
@@ -39,16 +49,71 @@
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            color: #222;
-            background: linear-gradient(135deg, #f9f9f9 0%, #e3e9f0 100%);
+            color: var(--white);
+            background: var(--illini-blue);
         }
 
-        header {
-            background: linear-gradient(120deg, #2c3e50 60%, #2980b9 100%);
-            color: white;
-            text-align: center;
-            padding: 3rem 0 2rem 0;
+        /* Full-screen hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
+            background: var(--illini-blue);
+            color: var(--white);
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 1rem;
+            border: 4px solid var(--illini-orange);
+            border-radius: 16px;
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 1100px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .hero-logo {
+            position: absolute;
+            top: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: auto;
+        }
+
+        .hero-text h1 {
+            font-size: 2.4rem;
+            margin: 0 0 0.75rem 0;
+        }
+
+        .hero-text p {
+            font-size: 1.05rem;
+            margin: 0.25rem 0;
+            opacity: 0.95;
+        }
+
+        .hero-photo {
+            width: 100%;
+            max-width: 360px;
+            justify-self: center;
+            border-radius: 14px;
+            border: 4px solid var(--illini-orange);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+            background: #fff;
         }
 
         .profile-img {
@@ -56,8 +121,8 @@
             height: 120px;
             object-fit: cover;
             border-radius: 50%;
-            border: 4px solid #f1c40f;
-            box-shadow: 0 4px 16px rgba(44, 62, 80, 0.15);
+            border: 4px solid var(--illini-orange);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
             margin-bottom: 1rem;
             background: #fff;
         }
@@ -74,9 +139,9 @@
         }
 
         nav {
-            background-color: #34495e;
+            background-color: var(--illini-blue-900);
             padding: 1rem;
-            box-shadow: 0 2px 8px rgba(44, 62, 80, 0.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
         }
 
         nav ul {
@@ -92,7 +157,7 @@
         }
 
         nav a {
-            color: white;
+            color: var(--white);
             text-decoration: none;
             font-weight: bold;
             padding: 0.5rem 1rem;
@@ -101,30 +166,32 @@
         }
 
         nav a:hover {
-            color: #2c3e50;
-            background: #f1c40f;
+            color: var(--white);
+            background: var(--illini-orange);
         }
 
         section {
             padding: 2rem;
             max-width: 900px;
             margin: 2rem auto 0 auto;
+            /* Keep transparent to sit on navy body */
         }
 
         h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #f1c40f;
+            color: var(--white);
+            border-bottom: 2px solid var(--illini-orange);
             padding-bottom: 0.5rem;
         }
 
         .project,
         .hobby,
         .family-member {
-            background-color: #fff;
+            background-color: var(--illini-blue-900);
+            color: var(--white);
             border-radius: 12px;
             padding: 1.5rem 1.2rem;
             margin-bottom: 1.5rem;
-            box-shadow: 0 4px 16px rgba(44, 62, 80, 0.08);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
             transition: transform 0.15s, box-shadow 0.15s;
         }
 
@@ -132,12 +199,44 @@
         .hobby:hover,
         .family-member:hover {
             transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.13);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        /* Buttons */
+        .resume-btn {
+            display: inline-block;
+            margin-top: 1.2rem;
+            padding: 0.7rem 1.5rem;
+            background: var(--illini-orange);
+            color: var(--white);
+            font-weight: bold;
+            border: none;
+            border-radius: 24px;
+            font-size: 1.1rem;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            transition: background 0.2s, color 0.2s, transform 0.15s;
+        }
+
+        .resume-btn:hover {
+            background: #ff5a2f;
+            /* Slightly lighter orange on hover */
+            color: var(--white);
+            transform: translateY(-2px) scale(1.04);
+        }
+
+        /* Links */
+        a {
+            color: var(--illini-orange);
+        }
+
+        a:hover {
+            opacity: 0.9;
         }
 
         footer {
-            background-color: #2c3e50;
-            color: white;
+            background-color: var(--illini-blue-900);
+            color: var(--white);
             text-align: center;
             padding: 1.5rem 0 1rem 0;
             margin-top: 3rem;
@@ -154,18 +253,42 @@
             nav li {
                 margin: 0.5rem 0;
             }
+
+            .hero-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 1.25rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-logo {
+                width: 96px;
+            }
+
+            .hero::before {
+                inset: 0.75rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <img src="PortfolioLogo2.png" alt="Profile photo of Payton Schutte" class="profile-img" />
-        <h1>Welcome to My Portfolio</h1>
-        <p>Learn more about my academic journey, projects, and personal life</p>
-        <a href="SchutteResume25.pdf" class="resume-btn" target="_blank" rel="noopener" download>Download Resume
-            (PDF)</a>
-    </header>
+    <section class="hero" aria-label="Introduction">
+        <img src="PortfolioLogo2.png" alt="Payton Schutte logo" class="hero-logo" />
+        <div class="hero-inner">
+            <div class="hero-text">
+                <h1>Hello, I am Payton Schutte.</h1>
+                <p>I'm a Computer Engineering student at the University of Illinois Urbana-Champaign.</p>
+                <p>I love building projects and exploring ML/AI across hardware and software.</p>
+            </div>
+            <div class="hero-media">
+                <img src="PortfolioLogo.png" alt="Photo of Payton Schutte" class="hero-photo" />
+            </div>
+        </div>
+    </section>
 
     <nav aria-label="Main navigation">
         <ul>
@@ -232,33 +355,13 @@
             <p class="visually-hidden">Note: Replace placeholders with exact course numbers/titles from your resume.</p>
         </section>
         <!-- Add more hobbies as needed -->
-        </section>
     </main>
 
     <footer>
         <p>© 2024 Payton Schutte. All rights reserved.</p>
         <p>Contact me at: <a href="mailto:paytonschutte34@gmail.com"
-                style="color: #f1c40f;">paytonschutte34@gmail.com</a></p>
+                style="color: var(--illini-orange);">paytonschutte34@gmail.com</a></p>
     </footer>
 </body>
 
 </html>
-.resume-btn {
-display: inline-block;
-margin-top: 1.2rem;
-padding: 0.7rem 1.5rem;
-background: #f1c40f;
-color: #2c3e50;
-font-weight: bold;
-border: none;
-border-radius: 24px;
-font-size: 1.1rem;
-text-decoration: none;
-box-shadow: 0 2px 8px rgba(44,62,80,0.08);
-transition: background 0.2s, color 0.2s, transform 0.15s;
-}
-.resume-btn:hover {
-background: #2c3e50;
-color: #f1c40f;
-transform: translateY(-2px) scale(1.04);
-}
