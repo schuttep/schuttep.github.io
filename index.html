@@ -33,13 +33,30 @@
             /* Illinois Blue */
             --illini-blue-900: #0F2140;
             /* Darker variant for surfaces */
-            --illini-orange: #E84A27;
+            --illini-orange: #FF5F05;
             /* Illinois Orange */
             --white: #FFFFFF;
+            /* Side column width */
+            --side-col: 120px;
+            /* Column top/base heights relative to width */
+            --col-top-h: calc(var(--side-col) * 1.1);
+            --col-bot-h: calc(var(--side-col) * 1.1);
+            /* Crop percentages of the original image height (no % sign) */
+            --col-top-pct: 25;
+            --col-bot-pct: 22;
+            /* Footer band height (set via JS) */
+            --footer-h: 0px;
         }
 
         html {
             scroll-behavior: smooth;
+        }
+
+        /* Prevent any horizontal overflow from full-width overlays */
+        html,
+        body {
+            max-width: 100%;
+            overflow-x: hidden;
         }
 
         /* Basic styling */
@@ -51,9 +68,67 @@
             padding: 0;
             color: var(--white);
             background: var(--illini-blue);
+            /* Make space for fixed side columns */
+            padding-left: var(--side-col);
+            padding-right: var(--side-col);
+            /* Establish positioning context for scroll-following side columns */
+            position: relative;
         }
 
-        /* Full-screen hero */
+        /* Three-part side columns */
+        .side {
+            position: absolute;
+            /* scrolls with page */
+            top: 0;
+            bottom: 0;
+            /* full document height */
+            width: var(--side-col);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .side-left {
+            left: 0;
+        }
+
+        .side-right {
+            right: 0;
+        }
+
+        .side .col-top,
+        .side .col-mid,
+        .side .col-bot {
+            position: absolute;
+            left: 0;
+            right: 0;
+            background-position: center top;
+            background-size: 100% auto;
+            /* scale to width, preserve aspect ratio */
+        }
+
+        .side .col-top {
+            top: 0;
+            height: var(--col-top-h);
+            background-repeat: no-repeat;
+            /* image set via JS crop */
+        }
+
+        .side .col-bot {
+            bottom: 0;
+            height: var(--col-bot-h);
+            background-repeat: no-repeat;
+            /* image set via JS crop */
+            background-position: center bottom;
+        }
+
+        .side .col-mid {
+            top: var(--col-top-h);
+            bottom: var(--col-bot-h);
+            background-repeat: repeat-y;
+            /* repeating tile set via JS crop */
+        }
+
+        /* Full-screen hero adjusted for banners */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -64,6 +139,10 @@
             color: var(--white);
             padding: 2rem;
             box-sizing: border-box;
+            z-index: 1;
+            /* above side columns */
+            margin: 0 auto;
+            /* ensure hero touches top of page */
         }
 
         /* Block I top-left */
@@ -71,7 +150,7 @@
             position: absolute;
             top: 1rem;
             left: 1rem;
-            width: 64px;
+            width: 140px;
             height: auto;
             z-index: 2;
         }
@@ -82,9 +161,14 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
-            max-width: 1100px;
+            max-width: 1400px;
             width: 100%;
             align-items: center;
+        }
+
+        .rotate-ccw {
+            transform: rotate(-90deg);
+            transform-origin: center;
         }
 
         .hero-logo {
@@ -92,8 +176,15 @@
             top: 1.5rem;
             left: 50%;
             transform: translateX(-50%);
-            width: 120px;
+            width: 200px;
             height: auto;
+        }
+
+        /* Center hero text block and content */
+        .hero-text {
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto;
         }
 
         .hero-text h1 {
@@ -108,19 +199,21 @@
         }
 
         .hero-photo {
-            width: 100%;
-            max-width: 360px;
+            width: auto;
+            max-width: 100%;
+            max-height: min(92vh, 1200px);
             justify-self: center;
             border-radius: 14px;
             border: 4px solid var(--illini-orange);
             box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
             background: #fff;
+            display: block;
         }
 
         /* About layout */
         .about-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 1fr;
             gap: 2rem;
             align-items: start;
         }
@@ -158,17 +251,36 @@
         }
 
         nav {
-            background-color: var(--illini-blue-900);
+            background-color: transparent;
+            /* background moved to ::before to span columns */
             padding: 1rem;
+            position: relative;
+            z-index: 3;
+            /* above sections and columns */
+        }
+
+        nav::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: calc(-1 * var(--side-col));
+            right: calc(-1 * var(--side-col));
+            background: var(--illini-blue-900);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            z-index: 0;
+            /* behind nav content */
         }
 
         nav ul {
             display: flex;
             justify-content: center;
-            list-style-type: none;
+            list-style: none;
             padding: 0;
             margin: 0;
+            position: relative;
+            z-index: 1;
+            /* above ::before band */
         }
 
         nav li {
@@ -193,7 +305,23 @@
             padding: 2rem;
             max-width: 900px;
             margin: 2rem auto 0 auto;
-            /* Keep transparent to sit on navy body */
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Full-width bands that overlay side columns for specific sections */
+        #about::before,
+        #major::before,
+        #classes::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: calc(-1 * var(--side-col));
+            right: calc(-1 * var(--side-col));
+            background: var(--illini-blue-900);
+            z-index: -1;
+            /* behind section content, above columns (section has z-index:1) */
         }
 
         h2 {
@@ -239,7 +367,6 @@
 
         .resume-btn:hover {
             background: #ff5a2f;
-            /* Slightly lighter orange on hover */
             color: var(--white);
             transform: translateY(-2px) scale(1.04);
         }
@@ -254,16 +381,39 @@
         }
 
         footer {
-            background-color: var(--illini-blue-900);
+            background-color: transparent;
+            /* background moved to ::before to span columns */
             color: var(--white);
             text-align: center;
             padding: 1.5rem 0 1rem 0;
             margin-top: 3rem;
             font-size: 1.1rem;
             letter-spacing: 0.02em;
+            position: relative;
+            z-index: 3;
+            /* above columns */
         }
 
+        /* Full-width footer band under columns */
+        body::after {
+            content: "";
+            position: absolute;
+            left: calc(-1 * var(--side-col));
+            right: calc(-1 * var(--side-col));
+            bottom: 0;
+            height: var(--footer-h);
+            background: var(--illini-blue-900);
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.25);
+            z-index: -1;
+            /* under columns (z-index:0) and content */
+        }
+
+        /* Mobile */
         @media (max-width: 600px) {
+            :root {
+                --side-col: 80px;
+            }
+
             nav ul {
                 flex-direction: column;
                 align-items: center;
@@ -286,9 +436,17 @@
             .hero-logo {
                 width: 96px;
             }
+
+            .hero-photo {
+                max-height: min(80vh, 680px);
+            }
+
+            .hero-block-i {
+                width: 100px;
+            }
         }
 
-        /* Stack About section on smaller screens */
+        /* Tablet/smaller laptops */
         @media (max-width: 900px) {
             .about-grid {
                 grid-template-columns: 1fr;
@@ -303,14 +461,29 @@
 </head>
 
 <body>
+    <!-- Side columns split into top/mid/bottom. Images will be cropped from column.png via JS -->
+    <div class="side side-left" aria-hidden="true">
+        <div class="col-top"></div>
+        <div class="col-mid"></div>
+        <div class="col-bot"></div>
+    </div>
+    <div class="side side-right" aria-hidden="true">
+        <div class="col-top"></div>
+        <div class="col-mid"></div>
+        <div class="col-bot"></div>
+    </div>
     <section class="hero" aria-label="Introduction">
-        <img src="theI.png" alt="Illinois Block I" class="hero-block-i" />
-        <img src="PortfolioLogo2.png" alt="Payton Schutte logo" class="hero-logo" />
+        <img src="theI3.jpg" alt="Illinois Block I" class="hero-block-i" />
+        <img src="PortfolioLogo2_ff5f05.png" alt="Payton Schutte logo" class="hero-logo" />
         <div class="hero-inner">
             <div class="hero-text">
                 <h1>Hello, I am Payton Schutte.</h1>
-                <p>I'm a Computer Engineering student at the University of Illinois Urbana-Champaign.</p>
-                <p>I love building projects and exploring ML/AI across hardware and software.</p>
+                <p>Senior in Computer Engineering at the</p>
+                <p>University of Illinois Urbana-Champaign's</p>
+                <p>Grainger College of Engineering.</p>
+            </div>
+            <div class="hero-media">
+                <img src="DSC00665.JPG" alt="Photo of Payton Schutte" class="hero-photo rotate-ccw" />
             </div>
         </div>
     </section>
@@ -338,8 +511,7 @@
                     <p>Feel free to explore and learn more about me!</p>
                 </div>
                 <div class="about-media">
-                    <!-- Replace me.jpg with your actual JPG filename -->
-                    <img src="me.jpg" alt="Photo of Payton Schutte" class="about-photo" />
+                    <!-- optional -->
                 </div>
             </div>
         </section>
@@ -351,10 +523,8 @@
             <p>After graduation, I hope to develop my expertise in the ML/AI field.</p>
         </section>
 
-
         <section id="projects">
             <h2>Projects</h2>
-
             <div class="project">
                 <h3>[Project Name 1]</h3>
                 <p><strong>Date:</strong> [Month Year]</p>
@@ -370,8 +540,6 @@
                 </p>
                 <p><strong>Skills Gained:</strong> [List skills or knowledge gained from this project]</p>
             </div>
-
-            <!-- Add more projects as needed -->
         </section>
 
         <section id="classes">
@@ -396,6 +564,103 @@
         <p>Contact me at: <a href="mailto:paytonschutte34@gmail.com"
                 style="color: var(--illini-orange);">paytonschutte34@gmail.com</a></p>
     </footer>
+    <script>
+        (function () {
+            const root = document.documentElement;
+            const styles = getComputedStyle(root);
+            const topPct = parseFloat(styles.getPropertyValue('--col-top-pct')) || 25;
+            const botPct = parseFloat(styles.getPropertyValue('--col-bot-pct')) || 22;
+
+            const img = new Image();
+            img.src = 'column.png';
+            img.onload = function () {
+                const w = img.naturalWidth;
+                const h = img.naturalHeight;
+                if (!w || !h) return;
+                const topH = Math.max(1, Math.round(h * topPct / 100));
+                const botH = Math.max(1, Math.round(h * botPct / 100));
+                const midH = Math.max(1, h - topH - botH);
+
+                function cropToURL(sx, sy, sw, sh) {
+                    const c = document.createElement('canvas');
+                    c.width = sw; c.height = sh;
+                    const ctx = c.getContext('2d');
+                    ctx.drawImage(img, sx, sy, sw, sh, 0, 0, sw, sh);
+                    return c.toDataURL();
+                }
+
+                const urlTop = cropToURL(0, 0, w, topH);
+                const urlMid = cropToURL(0, topH, w, midH);
+                const urlBot = cropToURL(0, h - botH, w, botH);
+
+                // Apply backgrounds
+                document.querySelectorAll('.side .col-top').forEach(el => {
+                    el.style.backgroundImage = `url('${urlTop}')`;
+                    el.style.backgroundSize = '100% auto';
+                    el.style.backgroundPosition = 'center top';
+                    el.style.backgroundRepeat = 'no-repeat';
+                });
+
+                document.querySelectorAll('.side .col-mid').forEach(el => {
+                    el.style.backgroundImage = `url('${urlMid}')`;
+                    el.style.backgroundSize = '100% auto';
+                    el.style.backgroundPosition = 'center top';
+                    el.style.backgroundRepeat = 'repeat-y';
+                });
+
+                document.querySelectorAll('.side .col-bot').forEach(el => {
+                    el.style.backgroundImage = `url('${urlBot}')`;
+                    el.style.backgroundSize = '100% auto';
+                    el.style.backgroundPosition = 'center bottom';
+                    el.style.backgroundRepeat = 'no-repeat';
+                });
+
+                // Ensure no gaps by matching displayed heights to slice aspect ratios
+                function applySliceHeights() {
+                    document.querySelectorAll('.side').forEach(side => {
+                        const sideW = Math.round(side.getBoundingClientRect().width);
+                        if (!sideW) return;
+                        const topDisp = Math.round(sideW * (topH / w));
+                        const botDisp = Math.round(sideW * (botH / w));
+                        const topEl = side.querySelector('.col-top');
+                        const midEl = side.querySelector('.col-mid');
+                        const botEl = side.querySelector('.col-bot');
+                        if (topEl) topEl.style.height = topDisp + 'px';
+                        if (botEl) botEl.style.height = botDisp + 'px';
+                        if (midEl) {
+                            midEl.style.top = topDisp + 'px';
+                            midEl.style.bottom = botDisp + 'px';
+                            // Nudge to avoid subpixel seams
+                            midEl.style.backgroundPosition = 'center 0px';
+                        }
+                    });
+                }
+
+                applySliceHeights();
+                window.addEventListener('resize', applySliceHeights);
+            };
+            // If the image fails to load, we leave sides empty gracefully.
+        })();
+    </script>
+    <script>
+        // Sync the footer band height to the actual footer height
+        (function () {
+            function setFooterHeight() {
+                const footer = document.querySelector('footer');
+                if (!footer) return;
+                const h = Math.ceil(footer.getBoundingClientRect().height);
+                document.documentElement.style.setProperty('--footer-h', h + 'px');
+            }
+            window.addEventListener('load', setFooterHeight);
+            window.addEventListener('resize', setFooterHeight);
+            // Mutation observer in case footer content changes dynamically
+            const footer = document.querySelector('footer');
+            if (footer && 'MutationObserver' in window) {
+                const mo = new MutationObserver(setFooterHeight);
+                mo.observe(footer, { childList: true, subtree: true, characterData: true });
+            }
+        })();
+    </script>
 </body>
 
 </html>
