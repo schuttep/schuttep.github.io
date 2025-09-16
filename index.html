@@ -1,28 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+<figure>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payton Schutte</title>
-    <!-- SEO Meta Tags -->
     <meta name="description"
         content="Portfolio website for Payton Schutte, Computer Engineering student at UIUC. Explore projects, classes, hobbies, and more.">
     <meta name="keywords" content="Payton Schutte, Portfolio, Computer Engineering, UIUC, Projects, Resume, Hobbies">
-    <meta name="author" content="Payton Schutte">
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content="Payton Schutte Portfolio">
     <meta property="og:description" content="Explore my academic journey, projects, and interests.">
-    <meta property="og:type" content="website">
     <meta property="og:url" content="https://schuttep.github.io/">
     <meta property="og:image"
         content="https://ui-avatars.com/api/?name=Payton+Schutte&background=13294B&color=E84A27&size=256">
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Payton Schutte Portfolio">
     <meta name="twitter:description" content="Explore my academic journey, projects, and interests.">
-    <meta name="twitter:image"
-        content="https://ui-avatars.com/api/?name=Payton+Schutte&background=13294B&color=E84A27&size=256">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <!-- Favicon -->
@@ -149,7 +142,8 @@
         .hero-block-i {
             position: absolute;
             top: 1rem;
-            left: 1rem;
+            right: 1rem;
+            left: auto;
             width: 140px;
             height: auto;
             z-index: 2;
@@ -159,9 +153,9 @@
             position: relative;
             z-index: 1;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            max-width: 1400px;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 2.25rem;
+            max-width: 1600px;
             width: 100%;
             align-items: center;
         }
@@ -176,6 +170,18 @@
             top: 1.5rem;
             left: 50%;
             transform: translateX(-50%);
+            width: 200px;
+            height: auto;
+        }
+
+        /* Place logo above greeting when nested inside hero-text */
+        .hero-text .hero-logo {
+            position: static;
+            top: auto;
+            left: auto;
+            transform: none;
+            display: block;
+            margin: 0 auto 0.75rem;
             width: 200px;
             height: auto;
         }
@@ -199,9 +205,10 @@
         }
 
         .hero-photo {
-            width: auto;
+            width: 100%;
             max-width: 100%;
-            max-height: min(92vh, 1200px);
+            height: auto;
+            max-height: min(96vh, 1400px);
             justify-self: center;
             border-radius: 14px;
             border: 4px solid var(--illini-orange);
@@ -255,8 +262,8 @@
             /* background moved to ::before to span columns */
             padding: 1rem;
             position: relative;
-            z-index: 3;
-            /* above sections and columns */
+            z-index: 2;
+            /* ensure nav content is clickable above other layers */
         }
 
         nav::before {
@@ -311,8 +318,11 @@
 
         /* Full-width bands that overlay side columns for specific sections */
         #about::before,
-        #major::before,
-        #classes::before {
+        #classes::before,
+        #experience::before,
+        #skills::before,
+        #resume::before,
+        #Personal::before {
             content: "";
             position: absolute;
             top: 0;
@@ -320,6 +330,7 @@
             left: calc(-1 * var(--side-col));
             right: calc(-1 * var(--side-col));
             background: var(--illini-blue-900);
+            border-radius: 12px;
             z-index: -1;
             /* behind section content, above columns (section has z-index:1) */
         }
@@ -342,11 +353,104 @@
             transition: transform 0.15s, box-shadow 0.15s;
         }
 
+        /* Experience items styled like projects */
+        .experience-item {
+            background-color: var(--illini-blue-900);
+            color: var(--white);
+            border-radius: 12px;
+            padding: 1.25rem 1.2rem;
+            margin-bottom: 1.1rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        .experience-item h3 {
+            margin: 0 0 .25rem 0;
+        }
+
+        .experience-meta {
+            opacity: 0.85;
+            font-size: 0.95rem;
+            margin-bottom: .5rem;
+        }
+
+        /* Skills badges */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem .6rem;
+        }
+
+        .skill-badge {
+            background: rgba(255, 95, 5, 0.15);
+            border: 1px solid var(--illini-orange);
+            color: var(--white);
+            padding: .35rem .6rem;
+            border-radius: 999px;
+            font-size: .95rem;
+            line-height: 1;
+        }
+
+        /* Resume preview */
+        .resume-actions {
+            margin-top: 1rem;
+        }
+
+        .resume-embed {
+            margin-top: 1rem;
+            width: 100%;
+            height: 520px;
+            border: 2px solid var(--illini-orange);
+            border-radius: 10px;
+            background: #0c1b33;
+        }
+
         .project:hover,
         .hobby:hover,
         .family-member:hover {
             transform: translateY(-4px) scale(1.02);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        /* Hobbies image gallery */
+        .hobby-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.9rem;
+            margin-top: 0.75rem;
+        }
+
+        .hobby-gallery figure {
+            margin: 0;
+        }
+
+        .hobby-gallery img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 3px solid var(--illini-orange);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+            background: #fff;
+            display: block;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .hobby-gallery img:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+        }
+
+        .hobby-gallery figcaption {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            margin-top: 0.35rem;
+            text-align: center;
         }
 
         /* Buttons */
@@ -438,7 +542,9 @@
             }
 
             .hero-photo {
-                max-height: min(80vh, 680px);
+                width: 100%;
+                height: auto;
+                max-height: min(90vh, 900px);
             }
 
             .hero-block-i {
@@ -458,209 +564,342 @@
             }
         }
     </style>
-</head>
+    </head>
 
-<body>
-    <!-- Side columns split into top/mid/bottom. Images will be cropped from column.png via JS -->
-    <div class="side side-left" aria-hidden="true">
-        <div class="col-top"></div>
-        <div class="col-mid"></div>
-        <div class="col-bot"></div>
-    </div>
-    <div class="side side-right" aria-hidden="true">
-        <div class="col-top"></div>
-        <div class="col-mid"></div>
-        <div class="col-bot"></div>
-    </div>
-    <section class="hero" aria-label="Introduction">
-        <img src="theI3.jpg" alt="Illinois Block I" class="hero-block-i" />
-        <img src="PortfolioLogo2_ff5f05.png" alt="Payton Schutte logo" class="hero-logo" />
-        <div class="hero-inner">
-            <div class="hero-text">
-                <h1>Hello, I am Payton Schutte.</h1>
-                <p>Senior in Computer Engineering at the</p>
-                <p>University of Illinois Urbana-Champaign's</p>
-                <p>Grainger College of Engineering.</p>
-            </div>
-            <div class="hero-media">
-                <img src="DSC00665.JPG" alt="Photo of Payton Schutte" class="hero-photo rotate-ccw" />
-            </div>
+    <body>
+        <!-- Side columns split into top/mid/bottom. Images will be cropped from column.png via JS -->
+        <div class="side side-left" aria-hidden="true">
+            <div class="col-top"></div>
+            <div class="col-mid"></div>
+            <div class="col-bot"></div>
         </div>
-    </section>
-
-    <nav aria-label="Main navigation">
-        <ul>
-            <li><a href="#about">About Me</a></li>
-            <li><a href="#major">My Major</a></li>
-            <li><a href="#classes">Relevant Classes</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#hobbies">Hobbies</a></li>
-            <li><a href="#family">Family</a></li>
-        </ul>
-    </nav>
-
-    <main>
-        <section id="about">
-            <h2>About Me</h2>
-            <div class="about-grid">
-                <div class="about-text">
-                    <p>Hello! I'm Payton Schutte, a computer engineering student at the University of Illinois at
-                        Urbana-Champaign.
-                        This website showcases my academic journey, personal projects, and interests outside of school.
-                    </p>
-                    <p>Feel free to explore and learn more about me!</p>
+        <div class="side side-right" aria-hidden="true">
+            <div class="col-top"></div>
+            <div class="col-mid"></div>
+            <div class="col-bot"></div>
+        </div>
+        <section class="hero" aria-label="Introduction">
+            <img src="images/theI3.jpg" alt="Illinois Block I" class="hero-block-i" />
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <img src="images/PortfolioLogo2_ff5f05.png" alt="Payton Schutte logo" class="hero-logo" />
+                    <h1>Hello, I am Payton Schutte.</h1>
+                    <p>Senior in Computer Engineering at the</p>
+                    <p>University of Illinois Urbana-Champaign's</p>
+                    <p>Grainger College of Engineering.</p>
                 </div>
-                <div class="about-media">
-                    <!-- optional -->
+                <div class="hero-media">
+                    <img src="images/DSC00665.JPG" alt="Photo of Payton Schutte" class="hero-photo rotate-ccw" />
                 </div>
             </div>
         </section>
 
-        <section id="major">
-            <h2>My Major</h2>
-            <p>I am currently pursuing a degree in <strong>Computer Engineering</strong> at the <strong>University of
-                    Illinois at Urbana-Champaign</strong>.</p>
-            <p>After graduation, I hope to develop my expertise in the ML/AI field.</p>
-        </section>
-
-        <section id="projects">
-            <h2>Projects</h2>
-            <div class="project">
-                <h3>[Project Name 1]</h3>
-                <p><strong>Date:</strong> [Month Year]</p>
-                <p><strong>Description:</strong> [Detailed description of the project, technologies used, and your role]
-                </p>
-                <p><strong>Skills Gained:</strong> [List skills or knowledge gained from this project]</p>
-            </div>
-
-            <div class="project">
-                <h3>[Project Name 2]</h3>
-                <p><strong>Date:</strong> [Month Year]</p>
-                <p><strong>Description:</strong> [Detailed description of the project, technologies used, and your role]
-                </p>
-                <p><strong>Skills Gained:</strong> [List skills or knowledge gained from this project]</p>
-            </div>
-        </section>
-
-        <section id="classes">
-            <h2>Relevant Classes</h2>
+        <nav aria-label="Main navigation">
             <ul>
-                <li>ECE 2xx – Digital Systems: Combinational/sequential logic, Verilog, FPGA labs</li>
-                <li>ECE 2xx – Computer Systems & Programming: C/C++, memory, concurrency basics</li>
-                <li>CS 2xx – Data Structures & Algorithms: Big-O, trees, graphs, hashing</li>
-                <li>MATH 2xx – Linear Algebra: Matrices, eigenvalues, applications to systems</li>
-                <li>MATH 2xx – Calculus III: Multivariable calculus and vector analysis</li>
-                <li>STAT 2xx – Probability & Statistics: Random variables, estimators, inference</li>
-                <li>ECE 3xx – Computer Architecture: ISA, pipelines, caches, performance</li>
-                <li>ECE 3xx – Signals & Systems: Fourier/Laplace, filters, sampling</li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#classes">Classes</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#Personal">Personal</a></li>
             </ul>
-            <p class="visually-hidden">Note: Replace placeholders with exact course numbers/titles from your resume.</p>
-        </section>
-        <!-- Add more hobbies as needed -->
-    </main>
+        </nav>
 
-    <footer>
-        <p>© 2024 Payton Schutte. All rights reserved.</p>
-        <p>Contact me at: <a href="mailto:paytonschutte34@gmail.com"
-                style="color: var(--illini-orange);">paytonschutte34@gmail.com</a></p>
-    </footer>
-    <script>
-        (function () {
-            const root = document.documentElement;
-            const styles = getComputedStyle(root);
-            const topPct = parseFloat(styles.getPropertyValue('--col-top-pct')) || 25;
-            const botPct = parseFloat(styles.getPropertyValue('--col-bot-pct')) || 22;
+        <main>
+            <section id="about">
+                <h2>About Me</h2>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p>I’m a computer engineer passionate about applying AI to solve real-world engineering
+                            challenges.
+                            My work spans deep learning, RISC-V system design, operating system development, and
+                            performance
+                            optimization of high-frequency trading systems. I’ve built projects ranging from geospatial
+                            image classification and Siamese neural networks to AI-powered QA systems, combining
+                            hands-on
+                            coding with model deployment. I enjoy tackling complex technical problems and exploring how
+                            AI
+                            can bridge low-level engineering with intelligent applications.</p>
+                        <p>Outside of work, I climb and restore old technology, which keeps me persistent and creatively
+                            engaged. I expand on these hobbies in the <a href="#Personal">Personal</a> section below.
+                        </p>
+                    </div>
+                    <div class="about-media">
+                        <!-- optional: add an about photo or timeline -->
+                    </div>
+                </div>
+            </section>
 
-            const img = new Image();
-            img.src = 'column.png';
-            img.onload = function () {
-                const w = img.naturalWidth;
-                const h = img.naturalHeight;
-                if (!w || !h) return;
-                const topH = Math.max(1, Math.round(h * topPct / 100));
-                const botH = Math.max(1, Math.round(h * botPct / 100));
-                const midH = Math.max(1, h - topH - botH);
+            <section id="projects">
+                <h2>Projects</h2>
+                <div class="project">
+                    <h3>Siamese Neural Network for One-Shot Image Recognition</h3>
+                    <p><strong>Description:</strong> Developed a Siamese Neural Network in a single Jupyter Notebook to
+                        perform one-shot image recognition, based on Koch et
+                        al. (2015). Engineered a deep learning model to generate discriminative embeddings for image
+                        similarity tasks, trained
+                        with contrastive loss on paired inputs, and evaluated using classification metrics and embedding
+                        visualizations.
+                        Demonstrated applications like identity verification and one-shot learning scenarios.</p>
+                    <p><strong>Technologies Used:</strong> Python, TensorFlow/Keras, NumPy, Matplotlib</p>
+                    <p><strong>Skills Gained:</strong> Deep learning, contrastive loss, embedding visualization,
+                        one-shot
+                        learning applications</p>
+                    <a class="resume-btn" href="https://github.com/schuttep/Siamese-Network" target="_blank"
+                        rel="noopener">View on GitHub</a>
+                </div>
 
-                function cropToURL(sx, sy, sw, sh) {
-                    const c = document.createElement('canvas');
-                    c.width = sw; c.height = sh;
-                    const ctx = c.getContext('2d');
-                    ctx.drawImage(img, sx, sy, sw, sh, 0, 0, sw, sh);
-                    return c.toDataURL();
-                }
+                <div class="project">
+                    <h3>[Project Name 2]</h3>
+                    <p><strong>Date:</strong> [Month Year]</p>
+                    <p><strong>Description:</strong> [Detailed description of the project, technologies used, and your
+                        role]
+                    </p>
+                    <p><strong>Skills Gained:</strong> [List skills or knowledge gained from this project]</p>
+                </div>
+            </section>
 
-                const urlTop = cropToURL(0, 0, w, topH);
-                const urlMid = cropToURL(0, topH, w, midH);
-                const urlBot = cropToURL(0, h - botH, w, botH);
+            <section id="experience">
+                <h2>Experience</h2>
+                <div class="experience-item">
+                    <h3>Software Engineering Intern — JamSystems</h3>
+                    <div class="experience-meta">Remote • June 2025 – Present</div>
+                    <ul>
+                        <li>Engineered and benchmarked low-latency C++ data structures for high-frequency trading
+                            systems,
+                            achieving 1.7×–3× speedups over standard library implementations.</li>
+                        <li>Optimized performance-critical code paths and prepared AI model retraining on the codebase
+                            to
+                            improve automated code understanding.</li>
+                    </ul>
+                    <p><strong>Tools:</strong> C++, AI/ML workflows</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Software Validation Intern — NXP Semiconductors</h3>
+                    <div class="experience-meta">San Diego, CA • May 2024 – August 2024</div>
+                    <ul>
+                        <li>Conducted 100+ stability tests across multiple platforms for NFC hardware/software releases.
+                        </li>
+                        <li>Automated 30+ previously manual test cases using Python, JCShell, and robotic testing
+                            frameworks.</li>
+                        <li>Modified test cases to meet evolving customer requirements, improving testing efficiency and
+                            coverage.</li>
+                    </ul>
+                    <p><strong>Tools:</strong> Python, JCShell, automated testing frameworks</p>
+                </div>
+            </section>
 
-                // Apply backgrounds
-                document.querySelectorAll('.side .col-top').forEach(el => {
-                    el.style.backgroundImage = `url('${urlTop}')`;
-                    el.style.backgroundSize = '100% auto';
-                    el.style.backgroundPosition = 'center top';
-                    el.style.backgroundRepeat = 'no-repeat';
-                });
+            <section id="skills">
+                <h2>Skills / Tech Stack</h2>
+                <div class="skills-grid">
+                    <span class="skill-badge">LangChain</span>
+                    <span class="skill-badge">PyTorch</span>
+                    <span class="skill-badge">Keras</span>
+                    <span class="skill-badge">TensorFlow</span>
+                    <span class="skill-badge">Python</span>
+                    <span class="skill-badge">C/C++</span>
+                    <span class="skill-badge">Java</span>
+                    <span class="skill-badge">FPGA</span>
+                    <span class="skill-badge">Linux</span>
+                    <span class="skill-badge">RISC-V</span>
+                    <span class="skill-badge">Git</span>
+                    <span class="skill-badge">GDB</span>
+                    <span class="skill-badge">Oscilloscope</span>
+                    <span class="skill-badge">Soldering</span>
+                    <span class="skill-badge">Circuit Design</span>
+                    <span class="skill-badge">SystemVerilog</span>
+                    <span class="skill-badge">Microsoft Office Suite</span>
+                </div>
+            </section>
 
-                document.querySelectorAll('.side .col-mid').forEach(el => {
-                    el.style.backgroundImage = `url('${urlMid}')`;
-                    el.style.backgroundSize = '100% auto';
-                    el.style.backgroundPosition = 'center top';
-                    el.style.backgroundRepeat = 'repeat-y';
-                });
+            <section id="classes">
+                <h2>Relevant Classes</h2>
+                <ul>
+                    <li><strong>Applied Machine Learning:</strong> Practical ML techniques, including
+                        supervised/unsupervised learning, neural networks, and model deployment using Python, PyTorch,
+                        and
+                        TensorFlow.</li>
+                    <li><strong>Applied Parallel Programming:</strong> Parallel computing concepts and implementation,
+                        covering multi-threading, GPU programming, and performance optimization.</li>
+                    <li><strong>Data Structures:</strong> Core data structures and algorithms, emphasizing efficient
+                        data
+                        storage, retrieval, and manipulation.</li>
+                    <li><strong>Computer Systems Engineering:</strong> Low-level systems design, including operating
+                        systems, RISC-V architecture, memory management, I/O devices, and system calls.</li>
+                    <li><strong>Principles of Safe Autonomy:</strong> Design of reliable autonomous systems with focus
+                        on
+                        verification, reachability analysis, and safety-critical principles.</li>
+                    <li><strong>Power Circuits & Electromechanics:</strong> Electric circuits, machines, and
+                        electromechanical systems, including power conversion, motors, and generators.</li>
+                    <li><strong>Digital Systems Laboratory:</strong> Hands-on design and testing of digital circuits
+                        using
+                        FPGAs, Verilog, and embedded systems integration.</li>
+                </ul>
+            </section>
 
-                document.querySelectorAll('.side .col-bot').forEach(el => {
-                    el.style.backgroundImage = `url('${urlBot}')`;
-                    el.style.backgroundSize = '100% auto';
-                    el.style.backgroundPosition = 'center bottom';
-                    el.style.backgroundRepeat = 'no-repeat';
-                });
+            <section id="resume">
+                <h2>Resume / CV</h2>
+                <div class="resume-actions">
+                    <a class="resume-btn" href="SchutteResume25.pdf" target="_blank" rel="noopener">Download PDF</a>
+                </div>
+                <!-- Optional embedded preview (can comment out if not desired) -->
+                <iframe class="resume-embed" src="SchutteResume25.pdf" title="Resume preview"></iframe>
+            </section>
 
-                // Ensure no gaps by matching displayed heights to slice aspect ratios
-                function applySliceHeights() {
-                    document.querySelectorAll('.side').forEach(side => {
-                        const sideW = Math.round(side.getBoundingClientRect().width);
-                        if (!sideW) return;
-                        const topDisp = Math.round(sideW * (topH / w));
-                        const botDisp = Math.round(sideW * (botH / w));
-                        const topEl = side.querySelector('.col-top');
-                        const midEl = side.querySelector('.col-mid');
-                        const botEl = side.querySelector('.col-bot');
-                        if (topEl) topEl.style.height = topDisp + 'px';
-                        if (botEl) botEl.style.height = botDisp + 'px';
-                        if (midEl) {
-                            midEl.style.top = topDisp + 'px';
-                            midEl.style.bottom = botDisp + 'px';
-                            // Nudge to avoid subpixel seams
-                            midEl.style.backgroundPosition = 'center 0px';
-                        }
+            <section id="Personal">
+                <h2>Personal</h2>
+                <div class="project">
+                    <h3>Hobbies</h3>
+                    <p>In my free time, I love exploring and restoring old technology, like fixing Sony Walkmans or
+                        working
+                        on an IBM Selectric 3. I’m also passionate about film photography and vinyl records. When I’m
+                        not in
+                        the workshop, you’ll find me climbing, surfing, spearfishing, camping, or hiking.</p>
+                    <div class="hobby-gallery">
+                        <figure>
+                            <img src="images/IMG_1610.jpeg" alt="Restored Sony Walkman">
+                            <figcaption>Hawaii Summit</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="images/IMG_2103.jpeg" alt="IBM Selectric 3 typewriter restoration">
+                            <figcaption>Walkmans</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="images/IMG_2399.jpeg" alt="35mm film photograph">
+                            <figcaption>Hometown Beach</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="images/IMG_3697.jpeg" alt="Vinyl records and turntable">
+                            <figcaption> Early Surfing</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="images/IMG_3137.jpeg" alt="Vinyl records and turntable">
+                            <figcaption>Surfing</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="images/IMG_1291.jpeg" alt="Vinyl records and turntable">
+                            <figcaption>Spear Fishing</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="images/IMG_6412.jpeg" alt="Outdoor rock climbing">
+                            <figcaption>Climbing</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="images/IMG_4696.jpeg" alt="Surfing at the beach">
+                            <figcaption>Hiking</figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <!-- <div class="project">
+                    <h3>Family</h3>
+                    <p>[Optional note about family or personal inspiration.]</p>
+                </div> -->
+            </section>
+            <!-- Add more hobbies as needed -->
+        </main>
+
+        <footer>
+            <p>Contact me at: <a href="mailto:paytonschutte34@gmail.com"
+                    style="color: var(--illini-orange);">paytonschutte34@gmail.com</a></p>
+        </footer>
+        <script>
+            (function () {
+                const root = document.documentElement;
+                const styles = getComputedStyle(root);
+                const topPct = parseFloat(styles.getPropertyValue('--col-top-pct')) || 25;
+                const botPct = parseFloat(styles.getPropertyValue('--col-bot-pct')) || 22;
+
+                const img = new Image();
+                img.src = 'images/column.png';
+                img.onload = function () {
+                    const w = img.naturalWidth;
+                    const h = img.naturalHeight;
+                    if (!w || !h) return;
+                    const topH = Math.max(1, Math.round(h * topPct / 100));
+                    const botH = Math.max(1, Math.round(h * botPct / 100));
+                    const midH = Math.max(1, h - topH - botH);
+
+                    function cropToURL(sx, sy, sw, sh) {
+                        const c = document.createElement('canvas');
+                        c.width = sw; c.height = sh;
+                        const ctx = c.getContext('2d');
+                        ctx.drawImage(img, sx, sy, sw, sh, 0, 0, sw, sh);
+                        return c.toDataURL();
+                    }
+
+                    const urlTop = cropToURL(0, 0, w, topH);
+                    const urlMid = cropToURL(0, topH, w, midH);
+                    const urlBot = cropToURL(0, h - botH, w, botH);
+
+                    // Apply backgrounds
+                    document.querySelectorAll('.side .col-top').forEach(el => {
+                        el.style.backgroundImage = `url('${urlTop}')`;
+                        el.style.backgroundSize = '100% auto';
+                        el.style.backgroundPosition = 'center top';
+                        el.style.backgroundRepeat = 'no-repeat';
                     });
-                }
 
-                applySliceHeights();
-                window.addEventListener('resize', applySliceHeights);
-            };
-            // If the image fails to load, we leave sides empty gracefully.
-        })();
-    </script>
-    <script>
-        // Sync the footer band height to the actual footer height
-        (function () {
-            function setFooterHeight() {
+                    document.querySelectorAll('.side .col-mid').forEach(el => {
+                        el.style.backgroundImage = `url('${urlMid}')`;
+                        el.style.backgroundSize = '100% auto';
+                        el.style.backgroundPosition = 'center top';
+                        el.style.backgroundRepeat = 'repeat-y';
+                    });
+
+                    document.querySelectorAll('.side .col-bot').forEach(el => {
+                        el.style.backgroundImage = `url('${urlBot}')`;
+                        el.style.backgroundSize = '100% auto';
+                        el.style.backgroundPosition = 'center bottom';
+                        el.style.backgroundRepeat = 'no-repeat';
+                    });
+
+                    // Ensure no gaps by matching displayed heights to slice aspect ratios
+                    function applySliceHeights() {
+                        document.querySelectorAll('.side').forEach(side => {
+                            const sideW = Math.round(side.getBoundingClientRect().width);
+                            if (!sideW) return;
+                            const topDisp = Math.round(sideW * (topH / w));
+                            const botDisp = Math.round(sideW * (botH / w));
+                            const topEl = side.querySelector('.col-top');
+                            const midEl = side.querySelector('.col-mid');
+                            const botEl = side.querySelector('.col-bot');
+                            if (topEl) topEl.style.height = topDisp + 'px';
+                            if (botEl) botEl.style.height = botDisp + 'px';
+                            if (midEl) {
+                                midEl.style.top = topDisp + 'px';
+                                midEl.style.bottom = botDisp + 'px';
+                                // Nudge to avoid subpixel seams
+                                midEl.style.backgroundPosition = 'center 0px';
+                            }
+                        });
+                    }
+
+                    applySliceHeights();
+                    window.addEventListener('resize', applySliceHeights);
+                };
+                // If the image fails to load, we leave sides empty gracefully.
+            })();
+        </script>
+        <script>
+            // Sync the footer band height to the actual footer height
+            (function () {
+                function setFooterHeight() {
+                    const footer = document.querySelector('footer');
+                    if (!footer) return;
+                    const h = Math.ceil(footer.getBoundingClientRect().height);
+                    document.documentElement.style.setProperty('--footer-h', h + 'px');
+                }
+                window.addEventListener('load', setFooterHeight);
+                window.addEventListener('resize', setFooterHeight);
+                // Mutation observer in case footer content changes dynamically
                 const footer = document.querySelector('footer');
-                if (!footer) return;
-                const h = Math.ceil(footer.getBoundingClientRect().height);
-                document.documentElement.style.setProperty('--footer-h', h + 'px');
-            }
-            window.addEventListener('load', setFooterHeight);
-            window.addEventListener('resize', setFooterHeight);
-            // Mutation observer in case footer content changes dynamically
-            const footer = document.querySelector('footer');
-            if (footer && 'MutationObserver' in window) {
-                const mo = new MutationObserver(setFooterHeight);
-                mo.observe(footer, { childList: true, subtree: true, characterData: true });
-            }
-        })();
-    </script>
-</body>
+                if (footer && 'MutationObserver' in window) {
+                    const mo = new MutationObserver(setFooterHeight);
+                    mo.observe(footer, { childList: true, subtree: true, characterData: true });
+                }
+            })();
+        </script>
+    </body>
 
 </html>
